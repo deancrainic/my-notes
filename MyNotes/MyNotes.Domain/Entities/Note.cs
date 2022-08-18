@@ -11,12 +11,12 @@ namespace MyNotes.Domain.Entities
         public string Title { get; set; }
         [MaxLength(3000)]
         public string Text { get; set; }
-        public DateTime DateCreated { get; set; }
+        public DateTime LastEdited { get; set; }
         public Guid UserId { get; set; }
 
         public Note()
         {
-            DateCreated = DateTime.Now;
+            LastEdited = DateTime.Now;
         }
     }
 }

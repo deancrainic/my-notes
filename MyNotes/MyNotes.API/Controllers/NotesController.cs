@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyNotes.Application.DTOs.NoteDTOs;
@@ -12,17 +13,18 @@ namespace MyNotes.API.Controllers
     public class NotesController : ControllerBase
     {
         private readonly IMediator _mediator;
-
-        public NotesController(IMediator mediator)
+        private readonly IMapper _mapper;
+        
+        public NotesController(IMediator mediator, IMapper mapper)
         {
             _mediator = mediator;
+            _mapper = mapper;
         }
 
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateNote([FromHeader] string authorization, [FromBody] CreateNoteDto newNote)
         {
-            // string authHeader = HttpContext.Request.Headers["Authorization"];
             string token = authorization.Split(" ")[1];
             
             var command = new CreateNoteCommand
@@ -33,8 +35,9 @@ namespace MyNotes.API.Controllers
             };
  
             var result = await _mediator.Send(command);
+            var mappedResult = _mapper.Map<GetNoteDto>(result);
 
-            return Ok(result);
+            return Ok(mappedResult);
         }
 
         [Authorize]
@@ -51,8 +54,9 @@ namespace MyNotes.API.Controllers
                 };
 
                 var result = await _mediator.Send(query);
-
-                return Ok(result);
+                var mappedResult = _mapper.Map<IEnumerable<GetNoteDto>>(result);
+                
+                return Ok(mappedResult);
             }
             catch (Exception ex)
             {
@@ -76,8 +80,9 @@ namespace MyNotes.API.Controllers
                 };
 
                 var result = await _mediator.Send(query);
+                var mappedResult = _mapper.Map<GetNoteDto>(result);
 
-                return Ok(result);
+                return Ok(mappedResult);
             }
             catch (Exception ex)
             {
@@ -103,8 +108,9 @@ namespace MyNotes.API.Controllers
                 };
 
                 var result = await _mediator.Send(command);
+                var mappedResult = _mapper.Map<GetNoteDto>(result);
 
-                return Ok(result);
+                return Ok(mappedResult);
             }
             catch (Exception ex)
             {

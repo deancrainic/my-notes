@@ -31,9 +31,11 @@ public class UpdateNoteCommandHandler : IRequestHandler<UpdateNoteCommand, Note>
 
         note.Title = request.Title;
         note.Text = request.Text;
+        note.LastEdited = DateTime.Now;
         
         await _uow.NoteCommandRepository.UpdateAsync(note);
-
+        await _uow.SaveAsync();
+        
         return note;
     }
 }
