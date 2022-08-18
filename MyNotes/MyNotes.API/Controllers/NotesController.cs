@@ -67,7 +67,7 @@ namespace MyNotes.API.Controllers
         [Authorize]
         [HttpGet]
         [Route("{id:guid}")]
-        public async Task<IActionResult> GetNoteById([FromHeader] string authorization, Guid id)
+        public async Task<IActionResult> GetNoteById([FromHeader] string authorization, [FromRoute] Guid id)
         {
             var token = authorization.Split(" ")[1];
 
@@ -93,7 +93,8 @@ namespace MyNotes.API.Controllers
         [Authorize]
         [HttpPatch]
         [Route("{id:guid}")]
-        public async Task<IActionResult> UpdateNoteById([FromHeader] string authorization, Guid id, UpdateNoteDto noteDto)
+        public async Task<IActionResult> UpdateNoteById([FromHeader] string authorization, [FromRoute] Guid id, 
+            [FromBody] UpdateNoteDto noteDto)
         {
             var token = authorization.Split(" ")[1];
 
@@ -111,6 +112,31 @@ namespace MyNotes.API.Controllers
                 var mappedResult = _mapper.Map<GetNoteDto>(result);
 
                 return Ok(mappedResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteNoteById([FromHeader] string authorization, [FromRoute] Guid id)
+        {
+            var token = authorization.Split(" ")[1];
+
+            try
+            {
+                var command = new DeleteNoteCommand
+                {
+                    Token = token,
+                    Id = id
+                };
+
+                var result = await _mediator.Send(command);
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
