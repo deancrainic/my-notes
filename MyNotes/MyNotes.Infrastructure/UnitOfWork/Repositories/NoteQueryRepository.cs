@@ -22,7 +22,7 @@ namespace MyNotes.Infrastructure.UnitOfWork.Repositories
         }
         public async Task<IEnumerable<Note>> GetAllNotesByUserAsync(User user)
         {
-            return await _dbSet.Where(n => n.UserId.Equals(user.Id)).ToListAsync();
+            return await _dbSet.Where(n => n.UserId.ToString().Equals(user.Id)).ToListAsync();
         }
 
         public async Task<Note> GetNoteByIdAsync(Guid id)
