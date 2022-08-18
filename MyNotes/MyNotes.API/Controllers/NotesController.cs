@@ -84,5 +84,32 @@ namespace MyNotes.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Authorize]
+        [HttpPatch]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateNoteById([FromHeader] string authorization, Guid id, UpdateNoteDto noteDto)
+        {
+            var token = authorization.Split(" ")[1];
+
+            try
+            {
+                var command = new UpdateNoteCommand()
+                {
+                    Token = token,
+                    Id = id,
+                    Title = noteDto.Title,
+                    Text = noteDto.Text
+                };
+
+                var result = await _mediator.Send(command);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
