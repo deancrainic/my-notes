@@ -1,0 +1,87 @@
+.login-container {
+  width: 100%;
+  height: 80%;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #3f3f3f;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.form-container h1 {
+  padding-top: 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  padding: 0;
+  font-size: 16px;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.password-label {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-right: 2rem;
+}
+
+.show-password {
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.show-password:hover {
+  color: greenyellow;
+}
+
+.form-input {
+  margin: 0 2rem 1rem 2rem ;
+  padding: 10px;
+  background-color: rgba(86, 86, 86, 0.5);
+  border: 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom: 2px solid gray;
+  font-size: 16px;
+  color: #e0e0e0;
+}
+
+.form-input:hover {
+  border-bottom: 2px solid greenyellow;
+}
+
+.form-input.ng-touched.ng-invalid {
+  border-bottom: 2px solid red;
+}
+
+.form-input:focus {
+  outline: 0;
+  border-bottom: 2px solid greenyellow;
+}
+
+.login-button {
+  padding: 1rem;
+  border: 0;
+  font-size: 16px;
+}
+
+.login-button:hover:enabled {
+  background-color: greenyellow;
+  border: 0;
+  cursor: pointer;
+}

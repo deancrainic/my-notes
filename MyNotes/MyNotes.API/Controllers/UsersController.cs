@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyNotes.Application.DTOs.UserDTOs;
 using MyNotes.Application.UserCommands;
@@ -73,6 +74,7 @@ namespace MyNotes.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetCurrentUser([FromHeader] string authorization)
         {
             var token = authorization.Split(" ")[1];
@@ -96,6 +98,7 @@ namespace MyNotes.API.Controllers
         }
 
         [HttpPatch]
+        [Authorize]
         public async Task<IActionResult> UpdateUser([FromHeader] string authorization, [FromBody] UpdateUserDto userDto)
         {
             if (!ModelState.IsValid)
@@ -125,6 +128,7 @@ namespace MyNotes.API.Controllers
 
         [HttpPatch]
         [Route("changePassword")]
+        [Authorize]
         public async Task<IActionResult> ChangePassword([FromHeader] string authorization,
             [FromBody] ChangeUserPasswordDto userDto)
         {
@@ -152,6 +156,7 @@ namespace MyNotes.API.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         public async Task<IActionResult> DeleteUser([FromHeader] string authorization)
         {
             var token = authorization.Split(" ")[1];

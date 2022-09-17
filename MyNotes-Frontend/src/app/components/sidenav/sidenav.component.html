@@ -1,0 +1,26 @@
+<app-header [inputDrawer]="drawer"></app-header>
+
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+    <div class="menu-item">
+      <a routerLink="/" [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{ exact: true }" class="menu-item-text">Home</a>
+    </div>
+    <div *ngIf="!isLoggedIn" class="menu-item">
+      <a routerLink="/signin" [routerLinkActive]="['link-active']" class="menu-item-text">Sign in</a>
+    </div>
+    <div *ngIf="!isLoggedIn" class="menu-item">
+      <a routerLink="/register" [routerLinkActive]="['link-active']" class="menu-item-text">Register</a>
+    </div>
+    <div *ngIf="isLoggedIn" class="menu-item">
+      <a routerLink="/profile" [routerLinkActive]="['link-active']" class="menu-item-text">Profile</a>
+    </div>
+    <div *ngIf="isLoggedIn" class="menu-item">
+      <a class="menu-item-text">Logout</a>
+    </div>
+  </mat-drawer>
+
+  <div class="sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</mat-drawer-container>

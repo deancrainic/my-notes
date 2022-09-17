@@ -1,0 +1,23 @@
+<div class="register-container">
+  <div class="form-container">
+    <h1>MyNotes</h1>
+    <form class="register-form" [formGroup]="this.registerViewModel">
+      <label class="form-label">Username</label>
+      <input class="form-input" type="text" formControlName="username">
+
+      <label class="form-label">Email</label>
+      <input class="form-input" type="email" formControlName="email">
+
+      <div class="password-label">
+        <label class="form-label">Password</label>
+        <p (click)="togglePassword()" class="show-password">{{this.showPassword}}</p>
+      </div>
+      <input class="form-input" [type]="this.inputType" formControlName="password">
+
+      <label class="form-label">Confirmed password</label>
+      <input class="form-input" type="password" formControlName="confirmedPassword">
+
+      <button class="register-button" [disabled]="!this.registerViewModel.valid">Register</button>
+    </form>
+  </div>
+</div>

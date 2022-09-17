@@ -1,0 +1,23 @@
+.header {
+  padding-left: 1.5rem;
+  padding-right: 2rem;
+  display: flex;
+  align-items: center;
+  border-bottom: 0.1rem solid #484848;
+  color: #e0e0e0;
+}
+
+.app-title {
+  font-size: 1.5rem;
+  padding-left: 2rem;
+}
+
+.icon-button {
+  cursor: pointer;
+  padding: 8px;
+}
+
+.icon-button:hover {
+  background-color: #38393e;
+  border-radius: 50%;
+}
